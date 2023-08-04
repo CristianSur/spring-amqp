@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+rabbit-config:
+  queue: test-queue
+  exchange: direct-exchange
+  routing-key: direct-routing-key
