@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/test")
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
-public class DirectExchangeController {
+public class MessageController {
 
 
     RabbitTemplate rabbitTemplate;
-    RabbitExchangeProperty rabbitExchangeProperty;
+    BrokerProperty brokerProperty;
 
-    @GetMapping
-    public String send() {
+    @GetMapping("/exchange")
+    public String sendThroughExchange() {
         rabbitTemplate.convertAndSend(
-                rabbitExchangeProperty.exchange(),
-                rabbitExchangeProperty.routingKey(),
-                "test message"
+                brokerProperty.exchange(),
+                brokerProperty.routingKey(),
+                "some text message"
         );
         return "ok. done";
     }
 
-    @GetMapping("/direct")
-    public String sendDirect() {
-        rabbitTemplate.convertAndSend(rabbitExchangeProperty.queue(), "test message");
+    @GetMapping("/queue")
+    public String sendDirectToQueue() {
+        rabbitTemplate.convertAndSend(brokerProperty.queue(), "some text message");
         return "ok. done";
     }
 

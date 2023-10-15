@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-public class QueueConsumer {
+public class BrokerListener {
 
-    @RabbitListener(queues = "${queue.name}")
+    @RabbitListener(queues = "${rabbit-config.queue}")
     public void receiveMessage(@Payload String message) {
         log.info("Received <{}>", message);
     }

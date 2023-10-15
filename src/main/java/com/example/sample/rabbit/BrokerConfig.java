@@ -12,24 +12,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
-public class SenderConfig {
+public class BrokerConfig {
 
-    RabbitExchangeProperty rabbitExchangeProperty;
+    BrokerProperty brokerProperty;
 
 
+    //creates queue
     @Bean
     Queue queue() {
-        return new Queue(rabbitExchangeProperty.queue(), true);
+        return new Queue(brokerProperty.queue(), true);
     }
 
+    //creates exchange
     @Bean
     DirectExchange exchange() {
-        return new DirectExchange(rabbitExchangeProperty.exchange());
+        return new DirectExchange(brokerProperty.exchange());
     }
 
+    //binds created queue to exchange
     @Bean
-    Binding testeBinding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(rabbitExchangeProperty.routingKey());
+    Binding bind(Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(brokerProperty.routingKey());
     }
 
 }
