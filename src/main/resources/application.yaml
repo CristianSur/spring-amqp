@@ -9,3 +9,6 @@ rabbit-config:
   queue: test-queue
   exchange: direct-exchange
   routing-key: direct-routing-key
+
+server:
+  port: 8080

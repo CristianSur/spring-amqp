@@ -16,7 +16,6 @@ public class BrokerConfig {
 
     BrokerProperty brokerProperty;
 
-
     //creates queue
     @Bean
     Queue queue() {
