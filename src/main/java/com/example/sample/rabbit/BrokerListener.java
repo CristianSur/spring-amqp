@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class BrokerListener {
 
     @RabbitListener(queues = "${rabbit-config.queue}")
-    public void receiveMessage(@Payload String message) {
+    public void receiveMessage(@Payload MessageObject message) {
         log.info("Received <{}>", message);
     }
 }
